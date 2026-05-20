@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ouro Digital — Conquistando a Tecnologia do Futuro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --gold: #FFD700;
+      --gold-dark: #B8860B;
+      --gold-light: #FFE55C;
+      --gold-glow: rgba(255, 215, 0, 0.3);
+
+      /* Dark theme (default) */
+      --bg: #080808;
+      --bg-2: #111111;
+      --bg-3: #1a1a1a;
+      --bg-card: #141414;
+      --text: #ffffff;
+      --text-muted: #aaaaaa;
+      --border: rgba(255, 215, 0, 0.2);
+      --nav-bg: rgba(8, 8, 8, 0.92);
+      --shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f0e8;
+      --bg-2: #ede8d8;
+      --bg-3: #e5dfc8;
+      --bg-card: #faf7f0;
+      --text: #1a1a1a;
+      --text-muted: #555555;
+      --border: rgba(180, 130, 0, 0.3);
+      --nav-bg: rgba(245, 240, 232, 0.95);
+      --shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-2); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .gold { color: var(--gold); }
+    .gold-gradient {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 50px; border: none;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; transition: all 0.3s ease; text-decoration: none; letter-spacing: 0.5px;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      color: #000;
+      box-shadow: 0 4px 20px var(--gold-glow);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,215,0,0.5); }
+    .btn-outline {
+      background: transparent; color: var(--gold);
+      border: 2px solid var(--gold);
+    }
+    .btn-outline:hover { background: var(--gold); color: #000; transform: translateY(-2px); }
+    .section-tag {
+      display: inline-block; padding: 6px 18px; border-radius: 50px;
+      background: var(--gold-glow); border: 1px solid var(--border);
+      color: var(--gold); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .section-title { font-family: 'Orbitron', monospace; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 16px; line-height: 1.2; }
+    .section-sub { color: var(--text-muted); font-size: 1.05rem; max-width: 600px; line-height: 1.7; }
+
+    /* ===== PARTICLES CANVAS ===== */
+    #particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--nav-bg); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s ease;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0;
+      text-decoration: none;
+    }
+    .nav-logo-img {
+      height: 54px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    .nav-logo:hover .nav-logo-img {
+      filter: drop-shadow(0 0 18px rgba(255,215,0,0.8));
+      transform: scale(1.04);
+    }
+    [data-theme="light"] .nav-logo-img {
+      filter: drop-shadow(0 0 8px rgba(180,130,0,0.4));
+    }
+    /* Fallback icon caso logo.png não exista */
+    .nav-logo-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Orbitron', monospace; font-weight: 900; font-size: 1.1rem; color: #000;
+      box-shadow: 0 0 15px var(--gold-glow);
+    }
+    .nav-logo-text { font-family: 'Orbitron', monospace; font-weight: 900; font-size: 1.1rem; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem;
+      letter-spacing: 0.5px; transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px;
+      background: var(--gold); border-radius: 1px; transform: scaleX(0); transition: transform 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--border);
+      background: var(--bg-2); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.3s; color: var(--text);
+    }
+    .theme-btn:hover { border-color: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+    .cart-btn {
+      position: relative; width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid var(--border); background: var(--bg-2);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.3s; color: var(--text);
+    }
+    .cart-btn:hover { border-color: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+    .cart-badge {
+      position: absolute; top: -6px; right: -6px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--gold); color: #000; font-size: 0.7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      display: none;
+    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 1px; transition: all 0.3s; }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.08) 0%, transparent 70%),
+                  var(--bg);
+      padding-top: 72px; overflow: hidden;
+    }
+    [data-theme="light"] .hero {
+      background: radial-gradient(ellipse at 50% 0%, rgba(180,130,0,0.12) 0%, transparent 70%), var(--bg);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+    /* Logo no Hero */
+    .hero-logo-wrap {
+      margin-bottom: 32px;
+      display: inline-block;
+    }
+    .hero-logo-img {
+      height: 120px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 24px rgba(255,215,0,0.6)) drop-shadow(0 0 60px rgba(255,215,0,0.25));
+      animation: logo-float 4s ease-in-out infinite;
+    }
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 24px rgba(255,215,0,0.6)) drop-shadow(0 0 60px rgba(255,215,0,0.25)); }
+      50%       { transform: translateY(-8px); filter: drop-shadow(0 0 36px rgba(255,215,0,0.9)) drop-shadow(0 0 80px rgba(255,215,0,0.4)); }
+    }
+    [data-theme="light"] .hero-logo-img {
+      filter: drop-shadow(0 0 16px rgba(180,130,0,0.5)) drop-shadow(0 0 40px rgba(180,130,0,0.2));
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 20px; border-radius: 50px;
+      background: var(--gold-glow); border: 1px solid var(--border);
+      color: var(--gold); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before { content: '●'; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    .hero h1 {
+      font-family: 'Orbitron', monospace; font-weight: 900;
+      font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 24px;
+    }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; max-width: 550px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stats { display: flex; gap: 48px; margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--gold); }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+    .hero-visual {
+      position: absolute; right: -100px; top: 50%; transform: translateY(-50%);
+      width: 600px; height: 600px; z-index: 1; opacity: 0.15;
+      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+      border-radius: 50%; filter: blur(60px);
+    }
+    [data-theme="light"] .hero-visual { opacity: 0.1; }
+
+    /* ===== CIRCUIT LINES ===== */
+    .circuit-line {
+      position: absolute; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      height: 1px; opacity: 0.2;
+    }
+
+    /* ===== SERVICES ===== */
+    .services { padding: 120px 0; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin-top: 60px;
+    }
+    .service-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 28px;
+      transition: all 0.4s ease; cursor: default; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      transform: scaleX(0); transition: transform 0.4s;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(255,215,0,0.1); border-color: var(--gold); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 60px; height: 60px; border-radius: 16px;
+      background: var(--gold-glow); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin-bottom: 24px;
+    }
+    .service-card h3 { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+    .service-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ===== ABOUT ===== */
+    .about { padding: 100px 0; background: var(--bg-2); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-visual {
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .about-ring {
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
+      position: relative; animation: rotate 20s linear infinite;
+    }
+    @keyframes rotate { to { transform: rotate(360deg); } }
+    .about-ring::before {
+      content: ''; position: absolute; top: -4px; left: 50%;
+      width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+    }
+    .about-center {
+      position: absolute; width: 200px; height: 200px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-glow), transparent);
+      border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center;
+      font-family: 'Orbitron', monospace; font-weight: 900; font-size: 2.5rem; color: var(--gold);
+      animation: counter-rotate 20s linear infinite; box-shadow: 0 0 40px var(--gold-glow);
+    }
+    @keyframes counter-rotate { to { transform: rotate(-360deg); } }
+    .about-content .section-sub { margin-bottom: 32px; }
+    .about-features { display: flex; flex-direction: column; gap: 20px; }
+    .about-feature { display: flex; align-items: flex-start; gap: 16px; }
+    .feature-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; box-shadow: 0 0 8px var(--gold); }
+    .about-feature p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+    .about-feature strong { color: var(--text); }
+
+    /* ===== PRICING ===== */
+    .pricing { padding: 120px 0; }
+    .pricing-header { text-align: center; margin-bottom: 60px; }
+    .pricing-header .section-sub { margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .plan-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px 32px; position: relative; overflow: hidden;
+      transition: all 0.4s ease; display: flex; flex-direction: column;
+    }
+    .plan-card:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(255,215,0,0.12); }
+    .plan-card.featured {
+      border-color: var(--gold); background: linear-gradient(160deg, #1a1500 0%, var(--bg-card) 60%);
+      box-shadow: 0 0 40px rgba(255,215,0,0.15);
+    }
+    [data-theme="light"] .plan-card.featured { background: linear-gradient(160deg, #fff8e0 0%, var(--bg-card) 60%); }
+    .plan-badge {
+      position: absolute; top: 20px; right: 20px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      color: #000; font-size: 0.7rem; font-weight: 800; padding: 4px 14px;
+      border-radius: 50px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .plan-icon { font-size: 2.5rem; margin-bottom: 20px; }
+    .plan-name { font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+    .plan-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 28px; }
+    .plan-price { margin-bottom: 32px; }
+    .plan-price .currency { font-size: 1.2rem; font-weight: 700; color: var(--gold); vertical-align: top; margin-top: 8px; display: inline-block; }
+    .plan-price .amount { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 900; color: var(--text); }
+    .plan-price .period { color: var(--text-muted); font-size: 0.9rem; margin-left: 4px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; flex: 1; }
+    .plan-features li { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-muted); }
+    .plan-features li::before { content: '✦'; color: var(--gold); font-size: 0.8rem; flex-shrink: 0; }
+    .plan-features li.included { color: var(--text); }
+    .add-to-cart {
+      width: 100%; padding: 16px; border-radius: 50px; border: 2px solid var(--gold);
+      background: transparent; color: var(--gold); font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s;
+      letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .add-to-cart:hover, .plan-card.featured .add-to-cart {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      color: #000; border-color: transparent; box-shadow: 0 8px 24px var(--gold-glow);
+    }
+    .add-to-cart:hover { transform: translateY(-2px); }
+    .add-to-cart.added { background: linear-gradient(135deg, #00c851, #007E33); border-color: transparent; color: #fff; }
+
+    /* ===== RESULTS ===== */
+    .results { padding: 100px 0; background: var(--bg-2); }
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 60px; }
+    .result-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 28px; text-align: center;
+    }
+    .result-num { font-family: 'Orbitron', monospace; font-size: 2.8rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
+    .result-label { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials { padding: 120px 0; }
+    .testimonials-header { text-align: center; margin-bottom: 60px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .testimonial-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px; transition: all 0.3s;
+    }
+    .testimonial-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .testimonial-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; letter-spacing: 4px; }
+    .testimonial-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #000; font-size: 1.1rem;
+    }
+    .author-name { font-weight: 700; font-size: 0.95rem; }
+    .author-role { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 120px 0;
+      background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, transparent 50%, rgba(255,215,0,0.03) 100%);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.06) 0%, transparent 70%);
+    }
+    .cta-section .section-title { font-size: clamp(2rem, 5vw, 3.5rem); }
+    .cta-section .section-sub { margin: 20px auto 40px; }
+
+    /* ===== FOOTER ===== */
+    .footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 60px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-top: 16px; max-width: 280px; }
+    .footer-col h4 { font-family: 'Orbitron', monospace; font-size: 0.85rem; color: var(--gold); margin-bottom: 20px; letter-spacing: 1px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap; gap: 16px; }
+    .footer-bottom p { color: var(--text-muted); font-size: 0.85rem; }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); text-decoration: none; font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    .social-link:hover { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 12px var(--gold-glow); }
+
+    /* ===== CART SIDEBAR ===== */
+    .cart-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .cart-overlay.active { opacity: 1; pointer-events: all; }
+    .cart-sidebar {
+      position: fixed; top: 0; right: -480px; width: 440px; height: 100vh;
+      background: var(--bg-card); border-left: 1px solid var(--border);
+      z-index: 2001; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .cart-sidebar.active { right: 0; }
+    .cart-header {
+      padding: 28px 24px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .cart-title { font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+    .cart-close {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+      background: none; cursor: pointer; color: var(--text-muted); font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+    }
+    .cart-close:hover { border-color: var(--gold); color: var(--gold); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); gap: 16px; }
+    .cart-empty-icon { font-size: 3rem; opacity: 0.4; }
+    .cart-item {
+      background: var(--bg-2); border: 1px solid var(--border); border-radius: 16px;
+      padding: 20px; display: flex; align-items: center; gap: 16px;
+    }
+    .cart-item-icon { font-size: 2rem; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--gold-glow); border-radius: 12px; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+    .cart-item-price { color: var(--gold); font-weight: 700; font-size: 0.9rem; }
+    .cart-item-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; padding: 4px; transition: color 0.3s; }
+    .cart-item-remove:hover { color: #ff4444; }
+    .cart-footer { padding: 20px 24px 28px; border-top: 1px solid var(--border); flex-shrink: 0; }
+    .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .cart-total-label { font-size: 0.9rem; color: var(--text-muted); }
+    .cart-total-price { font-family: 'Orbitron', monospace; font-size: 1.4rem; font-weight: 900; color: var(--gold); }
+    .checkout-btn {
+      width: 100%; padding: 18px; border-radius: 50px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      border: none; color: #000; font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 8px 24px var(--gold-glow);
+    }
+    .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,215,0,0.5); }
+    .cart-note { text-align: center; color: var(--text-muted); font-size: 0.78rem; margin-top: 12px; }
+
+    /* ===== MOBILE NAV ===== */
+    .mobile-nav {
+      position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+      background: var(--nav-bg); backdrop-filter: blur(20px);
+      z-index: 999; display: none; flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { color: var(--text); text-decoration: none; font-size: 1.5rem; font-weight: 700; font-family: 'Orbitron', monospace; }
+    .mobile-nav a:hover { color: var(--gold); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .about-inner { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { gap: 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .cart-sidebar { width: 100%; right: -100%; }
+      .cart-sidebar.active { right: 0; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      color: #000; padding: 14px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 0.9rem; z-index: 9999;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; align-items: center; gap: 10px; white-space: nowrap;
+      box-shadow: 0 8px 30px rgba(255,215,0,0.4);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ===== WHATSAPP FLOAT ===== */
+    .whatsapp-float {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: white; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.4); transition: all 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,0.6); }
+  </style>
+</head>
+<body>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast">✦ Plano adicionado ao carrinho!</div>
+
+<!-- ===== CART OVERLAY ===== -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- ===== CART SIDEBAR ===== -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <div class="cart-title">🛒 Seu Carrinho</div>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>Seu carrinho está vazio.</p>
+      <p style="font-size:0.8rem">Escolha um plano premium abaixo!</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="cart-total-label">Total mensal</span>
+      <span class="cart-total-price" id="cartTotal">R$ 0</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">
+      ⚡ Começar Agora
+    </button>
+    <p class="cart-note">🔒 Pagamento 100% seguro · Cancele quando quiser</p>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Ouro Digital" class="nav-logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';this.nextSibling.nextSibling.style.display='inline'" />
+      <div class="nav-logo-icon" style="display:none">O</div>
+      <span class="nav-logo-text gold-gradient" style="display:none;margin-left:12px">OURO DIGITAL</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#resultados">Resultados</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">🌙</button>
+      <button class="cart-btn" onclick="openCart()" title="Carrinho">
+        🛒
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <a href="#planos" class="btn btn-gold" style="padding:10px 24px;font-size:0.85rem">Ver Planos</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== MOBILE NAV ===== -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#servicos" onclick="toggleMobileNav()">Serviços</a>
+  <a href="#sobre" onclick="toggleMobileNav()">Sobre</a>
+  <a href="#planos" onclick="toggleMobileNav()">Planos</a>
+  <a href="#resultados" onclick="toggleMobileNav()">Resultados</a>
+  <a href="#contato" onclick="toggleMobileNav()">Contato</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <canvas id="particles"></canvas>
+  <div class="hero-visual"></div>
+  <div class="container">
+    <div class="hero-content">
+      <!-- Logo Hero -->
+      <div class="hero-logo-wrap">
+        <img src="logo.png" alt="Ouro Digital" class="hero-logo-img"
+             onerror="this.parentElement.style.display='none'" />
+      </div>
+      <div class="hero-badge">AGÊNCIA DE MARKETING DIGITAL</div>
+      <h1>
+        Conquistando<br/>
+        <span class="gold-gradient">A Tecnologia</span><br/>
+        Do Futuro
+      </h1>
+      <p>Transformamos sua presença digital em resultados reais. Estratégias de marketing de alta performance para marcas que querem dominar o mercado.</p>
+      <div class="hero-btns">
+        <a href="#planos" class="btn btn-gold">⚡ Ver Planos Premium</a>
+        <a href="#sobre" class="btn btn-outline">Saiba Mais</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Clientes ativos</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">Satisfação</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5x</span>
+          <span class="stat-label">Retorno médio</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">7+</span>
+          <span class="stat-label">Anos de mercado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="servicos">
+  <div class="container">
+    <span class="section-tag">NOSSOS SERVIÇOS</span>
+    <h2 class="section-title gold-gradient">Soluções Digitais <br/>de Alta Performance</h2>
+    <p class="section-sub">Cada estratégia é desenvolvida com dados, criatividade e tecnologia para maximizar seus resultados.</p>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">📈</div>
+        <h3>Tráfego Pago</h3>
+        <p>Campanhas de Google Ads, Meta Ads e TikTok Ads otimizadas para gerar leads qualificados e maximizar seu ROI.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🎯</div>
+        <h3>SEO Avançado</h3>
+        <p>Posicionamento orgânico no Google com estratégias white-hat que garantem resultados duradouros para seu negócio.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📱</div>
+        <h3>Social Media</h3>
+        <p>Gestão completa das suas redes sociais com conteúdo estratégico, design premium e crescimento orgânico consistente.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🎨</div>
+        <h3>Branding & Design</h3>
+        <p>Identidade visual que comunica o valor da sua marca e cria conexão emocional com seu público-alvo.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">⚡</div>
+        <h3>Automação de Marketing</h3>
+        <p>Funis de vendas automatizados, e-mail marketing e CRM integrado para converter leads em clientes fiéis.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📊</div>
+        <h3>Análise & Relatórios</h3>
+        <p>Dashboards completos com métricas em tempo real para acompanhar a performance de cada ação e tomar decisões assertivas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="sobre">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-visual">
+        <div class="about-ring">
+          <div class="about-center">O</div>
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="section-tag">SOBRE A OURO DIGITAL</span>
+        <h2 class="section-title">Por que somos <span class="gold-gradient">diferentes?</span></h2>
+        <p class="section-sub">Somos uma agência premium especializada em transformar negócios digitais. Combinamos dados, criatividade e tecnologia de ponta para entregar resultados extraordinários.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p><strong>Equipe especializada</strong> — Profissionais certificados pelas principais plataformas digitais do mundo.</p>
+          </div>
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p><strong>Estratégia orientada a dados</strong> — Cada decisão é baseada em métricas reais e análise profunda do mercado.</p>
+          </div>
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p><strong>Atendimento dedicado</strong> — Você tem um gerente de conta exclusivo disponível para sua empresa.</p>
+          </div>
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p><strong>Resultados mensuráveis</strong> — Relatórios detalhados com transparência total de todos os indicadores.</p>
+          </div>
+        </div>
+        <div style="margin-top:36px">
+          <a href="#planos" class="btn btn-gold">Conhecer os Planos ⚡</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing" id="planos">
+  <div class="container">
+    <div class="pricing-header">
+      <span class="section-tag">PLANOS PREMIUM</span>
+      <h2 class="section-title">Escolha o plano <span class="gold-gradient">ideal</span></h2>
+      <p class="section-sub">Planos desenvolvidos para cada fase do seu negócio. Sem contratos longos. Cancele quando quiser.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- STARTER -->
+      <div class="plan-card fade-up">
+        <div class="plan-icon">🥈</div>
+        <div class="plan-name">STARTER</div>
+        <div class="plan-desc">Ideal para negócios que estão começando no digital</div>
+        <div class="plan-price">
+          <span class="currency">R$</span>
+          <span class="amount">997</span>
+          <span class="period">/mês</span>
+        </div>
+        <ul class="plan-features">
+          <li class="included">Gestão de 2 redes sociais</li>
+          <li class="included">12 posts mensais</li>
+          <li class="included">Campanha de tráfego pago (básico)</li>
+          <li class="included">Relatório mensal</li>
+          <li class="included">Suporte via WhatsApp</li>
+          <li style="opacity:0.4">SEO Avançado</li>
+          <li style="opacity:0.4">Automação de marketing</li>
+          <li style="opacity:0.4">Gerente de conta exclusivo</li>
+        </ul>
+        <button class="add-to-cart" onclick="addToCart('STARTER', 997, '🥈', this)">
+          🛒 Adicionar ao Carrinho
+        </button>
+      </div>
+
+      <!-- PRO (Featured) -->
+      <div class="plan-card featured fade-up">
+        <div class="plan-badge">⭐ MAIS POPULAR</div>
+        <div class="plan-icon">🥇</div>
+        <div class="plan-name">PRO</div>
+        <div class="plan-desc">Para empresas prontas para escalar com marketing de alto impacto</div>
+        <div class="plan-price">
+          <span class="currency">R$</span>
+          <span class="amount">1.997</span>
+          <span class="period">/mês</span>
+        </div>
+        <ul class="plan-features">
+          <li class="included">Gestão de 4 redes sociais</li>
+          <li class="included">24 posts mensais + stories</li>
+          <li class="included">Tráfego pago avançado (Google + Meta)</li>
+          <li class="included">SEO Avançado</li>
+          <li class="included">Relatório quinzenal</li>
+          <li class="included">Automação de e-mail básica</li>
+          <li class="included">Suporte prioritário</li>
+          <li style="opacity:0.4">Gerente de conta exclusivo</li>
+        </ul>
+        <button class="add-to-cart" onclick="addToCart('PRO', 1997, '🥇', this)">
+          🛒 Adicionar ao Carrinho
+        </button>
+      </div>
+
+      <!-- ELITE -->
+      <div class="plan-card fade-up">
+        <div class="plan-badge" style="background:linear-gradient(135deg,#e8d5a3,#c5a028)">💎 ELITE</div>
+        <div class="plan-icon">👑</div>
+        <div class="plan-name">ELITE</div>
+        <div class="plan-desc">Solução completa para marcas que dominam o mercado digital</div>
+        <div class="plan-price">
+          <span class="currency">R$</span>
+          <span class="amount">3.997</span>
+          <span class="period">/mês</span>
+        </div>
+        <ul class="plan-features">
+          <li class="included">Gestão ilimitada de redes sociais</li>
+          <li class="included">Posts diários + stories + reels</li>
+          <li class="included">Tráfego pago completo (todas plataformas)</li>
+          <li class="included">SEO Avançado + Link Building</li>
+          <li class="included">Relatórios semanais em tempo real</li>
+          <li class="included">Automação de marketing completa</li>
+          <li class="included">Gerente de conta exclusivo</li>
+          <li class="included">Consultoria estratégica mensal</li>
+        </ul>
+        <button class="add-to-cart" onclick="addToCart('ELITE', 3997, '👑', this)">
+          🛒 Adicionar ao Carrinho
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS ===== -->
+<section class="results" id="resultados">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:0">
+      <span class="section-tag">NOSSOS NÚMEROS</span>
+      <h2 class="section-title">Resultados que <span class="gold-gradient">falam</span></h2>
+    </div>
+    <div class="results-grid">
+      <div class="result-card fade-up">
+        <div class="result-num">R$ 50M+</div>
+        <div class="result-label">Em receita gerada para clientes</div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-num">10M+</div>
+        <div class="result-label">Leads qualificados entregues</div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-num">300%</div>
+        <div class="result-label">ROI médio das campanhas</div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-num">500+</div>
+        <div class="result-label">Empresas transformadas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="depoimentos">
+  <div class="container">
+    <div class="testimonials-header">
+      <span class="section-tag">DEPOIMENTOS</span>
+      <h2 class="section-title">O que nossos <span class="gold-gradient">clientes</span> dizem</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"A Ouro Digital triplicou nosso faturamento em apenas 4 meses. A equipe é incrível e os resultados são reais. Melhor investimento que fizemos."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">C</div>
+          <div>
+            <div class="author-name">Carlos Mendes</div>
+            <div class="author-role">CEO — TechStore Brasil</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"Profissionalismo e resultados acima do esperado. Em 6 meses saímos de zero para 15 mil seguidores qualificados e nossas vendas online cresceram 400%."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Ana Lima</div>
+            <div class="author-role">Fundadora — Estúdio Lima</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"O plano Elite foi um divisor de águas para nosso e-commerce. ROI de 380% nas campanhas de tráfego pago. Recomendo para qualquer empresa séria."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <div class="author-name">Ricardo Santos</div>
+            <div class="author-role">Diretor — RS Commerce</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section" id="contato">
+  <div class="container" style="position:relative;z-index:2">
+    <span class="section-tag">PRONTO PARA CRESCER?</span>
+    <h2 class="section-title">Sua marca merece <span class="gold-gradient">resultados de ouro</span></h2>
+    <p class="section-sub">Agende uma consulta gratuita e descubra como podemos transformar o seu negócio digital hoje mesmo.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px">
+      <a href="https://wa.me/5500000000000" target="_blank" class="btn btn-gold" style="font-size:1rem;padding:18px 40px">
+        💬 Falar no WhatsApp
+      </a>
+      <a href="#planos" class="btn btn-outline" style="font-size:1rem;padding:18px 40px">
+        Ver Planos
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="display:inline-flex">
+          <img src="logo.png" alt="Ouro Digital" class="nav-logo-img" style="height:60px"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';this.nextSibling.nextSibling.style.display='inline'" />
+          <div class="nav-logo-icon" style="display:none">O</div>
+          <span class="nav-logo-text gold-gradient" style="display:none;margin-left:12px">OURO DIGITAL</span>
+        </a>
+        <p>Conquistando a tecnologia do futuro com estratégias de marketing digital de alta performance.</p>
+      </div>
+      <div class="footer-col">
+        <h4>SERVIÇOS</h4>
+        <ul>
+          <li><a href="#servicos">Tráfego Pago</a></li>
+          <li><a href="#servicos">SEO Avançado</a></li>
+          <li><a href="#servicos">Social Media</a></li>
+          <li><a href="#servicos">Branding</a></li>
+          <li><a href="#servicos">Automação</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>EMPRESA</h4>
+        <ul>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#resultados">Resultados</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CONTATO</h4>
+        <ul>
+          <li><a href="#">📧 contato@ourodigital.com</a></li>
+          <li><a href="#">📱 (00) 00000-0000</a></li>
+          <li><a href="#">📍 Brasil</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Ouro Digital. Todos os direitos reservados.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" title="Instagram">📸</a>
+        <a href="#" class="social-link" title="LinkedIn">💼</a>
+        <a href="#" class="social-link" title="YouTube">▶️</a>
+        <a href="#" class="social-link" title="TikTok">🎵</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+  💬
+</a>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // ===== THEME =====
+  const themeBtn = document.getElementById('themeBtn');
+  let isDark = true;
+
+  function toggleTheme() {
+    isDark = !isDark;
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    themeBtn.textContent = isDark ? '🌙' : '☀️';
+  }
+
+  // ===== CART STATE =====
+  let cartItems = [];
+
+  function addToCart(name, price, icon, btn) {
+    const existing = cartItems.find(i => i.name === name);
+    if (existing) {
+      showToast('⚠️ Este plano já está no carrinho!');
+      return;
+    }
+    cartItems.push({ name, price, icon });
+    updateCartUI();
+    btn.textContent = '✅ Adicionado!';
+    btn.classList.add('added');
+    setTimeout(() => {
+      btn.textContent = '🛒 Adicionar ao Carrinho';
+      btn.classList.remove('added');
+    }, 3000);
+    showToast(`✦ Plano ${name} adicionado!`);
+    openCart();
+  }
+
+  function removeFromCart(index) {
+    cartItems.splice(index, 1);
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    const badge = document.getElementById('cartBadge');
+    const itemsEl = document.getElementById('cartItems');
+    const footer = document.getElementById('cartFooter');
+    const empty = document.getElementById('cartEmpty');
+    const totalEl = document.getElementById('cartTotal');
+
+    badge.style.display = cartItems.length > 0 ? 'flex' : 'none';
+    badge.textContent = cartItems.length;
+
+    if (cartItems.length === 0) {
+      empty.style.display = 'flex';
+      footer.style.display = 'none';
+      // Remove all cart item elements
+      const existingItems = itemsEl.querySelectorAll('.cart-item');
+      existingItems.forEach(el => el.remove());
+    } else {
+      empty.style.display = 'none';
+      footer.style.display = 'block';
+
+      // Rebuild items
+      const existingItems = itemsEl.querySelectorAll('.cart-item');
+      existingItems.forEach(el => el.remove());
+
+      cartItems.forEach((item, i) => {
+        const el = document.createElement('div');
+        el.className = 'cart-item';
+        el.innerHTML = `
+          <div class="cart-item-icon">${item.icon}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">Plano ${item.name}</div>
+            <div class="cart-item-price">R$ ${item.price.toLocaleString('pt-BR')}/mês</div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
+        `;
+        itemsEl.appendChild(el);
+      });
+
+      const total = cartItems.reduce((sum, i) => sum + i.price, 0);
+      totalEl.textContent = `R$ ${total.toLocaleString('pt-BR')}`;
+    }
+  }
+
+  function openCart() {
+    document.getElementById('cartSidebar').classList.add('active');
+    document.getElementById('cartOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    document.getElementById('cartSidebar').classList.remove('active');
+    document.getElementById('cartOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function checkout() {
+    if (cartItems.length === 0) return;
+    const planNames = cartItems.map(i => i.name).join(', ');
+    const total = cartItems.reduce((sum, i) => sum + i.price, 0);
+    const msg = encodeURIComponent(`Olá! Tenho interesse nos planos: ${planNames}. Total: R$ ${total.toLocaleString('pt-BR')}/mês. Podemos conversar?`);
+    window.open(`https://wa.me/5500000000000?text=${msg}`, '_blank');
+  }
+
+  // ===== TOAST =====
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  // ===== MOBILE NAV =====
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  // ===== PARTICLES =====
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.speedY = (Math.random() - 0.5) * 0.4;
+      this.opacity = Math.random() * 0.5 + 0.1;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 215, 0, ${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    resizeCanvas();
+    particles = [];
+    for (let i = 0; i < 80; i++) particles.push(new Particle());
+  }
+
+  function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255,215,0,${0.08 * (1 - dist / 100)})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawConnections();
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateParticles);
+  }
+
+  window.addEventListener('resize', initParticles);
+  initParticles();
+  animateParticles();
+
+  // ===== SCROLL ANIMATIONS =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ===== NAVBAR SCROLL =====
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.style.borderBottomColor = 'var(--border)';
+    }
+  });
+</script>
+</body>
+</html>
