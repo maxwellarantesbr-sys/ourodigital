@@ -876,7 +876,7 @@
     <h2 class="section-title">Sua marca merece <span class="gold-gradient">resultados de ouro</span></h2>
     <p class="section-sub">Agende uma consulta gratuita e descubra como podemos transformar o seu negócio digital hoje mesmo.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px">
-      <a href="https://wa.me/5500000000000" target="_blank" class="btn btn-gold" style="font-size:1rem;padding:18px 40px">
+      <a href="https://wa.me/5511917949412" target="_blank" class="btn btn-gold" style="font-size:1rem;padding:18px 40px">
         💬 Falar no WhatsApp
       </a>
       <a href="#planos" class="btn btn-outline" style="font-size:1rem;padding:18px 40px">
@@ -941,12 +941,128 @@
 </footer>
 
 <!-- WhatsApp Float -->
-<a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+<a href="https://wa.me/5511917949412" target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
   💬
 </a>
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
+  // ===== LOGO SVG EMBUTIDO (v2 — com circuito dourado) =====
+  var _d = '<defs>'
+    + '<linearGradient id="gM" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF5A0"/><stop offset="20%" stop-color="#FFE033"/><stop offset="50%" stop-color="#FFD700"/><stop offset="75%" stop-color="#C89000"/><stop offset="100%" stop-color="#7A4E00"/></linearGradient>'
+    + '<linearGradient id="gS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#5C3500"/></linearGradient>'
+    + '<linearGradient id="gBeam" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFD700" stop-opacity="0"/><stop offset="70%" stop-color="#FFD700" stop-opacity="0.35"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.85"/></linearGradient>'
+    + '<radialGradient id="gStar" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/><stop offset="12%" stop-color="#FFFDE0" stop-opacity="0.95"/><stop offset="35%" stop-color="#FFD700" stop-opacity="0.55"/><stop offset="70%" stop-color="#FFD700" stop-opacity="0.1"/><stop offset="100%" stop-color="#000" stop-opacity="0"/></radialGradient>'
+    + '<radialGradient id="gAmb" cx="50%" cy="38%" r="56%"><stop offset="0%" stop-color="#6A3800" stop-opacity="0.55"/><stop offset="45%" stop-color="#2A1500" stop-opacity="0.3"/><stop offset="100%" stop-color="#000" stop-opacity="0"/></radialGradient>'
+    + '<radialGradient id="gFloor" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD700" stop-opacity="0.65"/><stop offset="45%" stop-color="#C07800" stop-opacity="0.3"/><stop offset="100%" stop-color="#000" stop-opacity="0"/></radialGradient>'
+    + '<filter id="fGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+    + '<filter id="fCenter" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur in="SourceGraphic" stdDeviation="18" result="b1"/><feGaussianBlur in="SourceGraphic" stdDeviation="8" result="b2"/><feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+    + '<filter id="fText" x="-15%" y="-60%" width="130%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+    + '<filter id="fDrop"><feDropShadow dx="5" dy="7" stdDeviation="7" flood-color="#000" flood-opacity="0.85"/></filter>'
+    + '</defs>';
+
+  // Função helper para traço de circuito com pad
+  function _tr(d, op) {
+    op = op || '0.75';
+    return '<path d="' + d + '" stroke="#C8800A" stroke-width="1.6" fill="none" stroke-opacity="' + op + '"/>';
+  }
+  function _pad(x, y, op) {
+    op = op || '0.75';
+    return '<circle cx="' + x + '" cy="' + y + '" r="3.8" fill="none" stroke="#C8800A" stroke-width="1.5" stroke-opacity="' + op + '"/>'
+         + '<circle cx="' + x + '" cy="' + y + '" r="1.6" fill="#D09010" fill-opacity="' + op + '"/>';
+  }
+
+  var _circuits =
+    // === ESQUERDA SUPERIOR ===
+    _tr('M155,86 L102,86 L102,60 L65,60 L65,40 L35,40','0.78') + _pad(35,40,'0.78') +
+    _tr('M150,106 L88,106 L88,76 L48,76 L48,52 L18,52','0.72') + _pad(18,52,'0.72') +
+    _tr('M148,124 L75,124 L75,95 L18,95','0.70') + _pad(18,95,'0.70') +
+    // === ESQUERDA MEIO ===
+    _tr('M110,146 L55,146 L55,126 L8,126','0.72') + _pad(8,126,'0.72') +
+    _tr('M110,162 L42,162 L42,186 L5,186','0.80') + _pad(5,186,'0.80') +
+    _tr('M110,178 L50,178 L50,200 L4,200','0.70') + _pad(4,200,'0.70') +
+    // === ESQUERDA INFERIOR ===
+    _tr('M128,200 L65,200 L65,224 L25,224','0.70') + _pad(25,224,'0.70') +
+    _tr('M138,220 L80,220 L80,250 L32,250','0.67') + _pad(32,250,'0.67') +
+    _tr('M148,240 L92,240 L92,270 L48,270 L48,295','0.63') + _pad(48,295,'0.63') +
+    _tr('M158,260 L105,260 L105,292 L60,292 L60,318','0.58') + _pad(60,318,'0.58') +
+    // === DIREITA SUPERIOR ===
+    _tr('M345,86 L398,86 L398,60 L435,60 L435,40 L465,40','0.78') + _pad(465,40,'0.78') +
+    _tr('M350,106 L412,106 L412,76 L452,76 L452,52 L482,52','0.72') + _pad(482,52,'0.72') +
+    _tr('M352,124 L425,124 L425,95 L482,95','0.70') + _pad(482,95,'0.70') +
+    // === DIREITA MEIO ===
+    _tr('M390,146 L445,146 L445,126 L492,126','0.72') + _pad(492,126,'0.72') +
+    _tr('M390,162 L458,162 L458,186 L495,186','0.80') + _pad(495,186,'0.80') +
+    _tr('M390,178 L450,178 L450,200 L496,200','0.70') + _pad(496,200,'0.70') +
+    // === DIREITA INFERIOR ===
+    _tr('M372,200 L435,200 L435,224 L475,224','0.70') + _pad(475,224,'0.70') +
+    _tr('M362,220 L420,220 L420,250 L468,250','0.67') + _pad(468,250,'0.67') +
+    _tr('M352,240 L408,240 L408,270 L452,270 L452,295','0.63') + _pad(452,295,'0.63') +
+    _tr('M342,260 L395,260 L395,292 L440,292 L440,318','0.58') + _pad(440,318,'0.58');
+
+  var _O =
+    // 3D depth
+    '<rect x="122" y="48" width="272" height="272" rx="54" ry="54" fill="#4A2E00" filter="url(#fDrop)"/>'
+    + '<rect x="118" y="44" width="272" height="272" rx="54" ry="54" fill="url(#gS)" opacity="0.5"/>'
+    // Main face
+    + '<rect x="110" y="36" width="272" height="272" rx="54" ry="54" fill="url(#gM)" filter="url(#fGlow)"/>'
+    // Inner hole
+    + '<rect x="158" y="84" width="176" height="176" rx="34" ry="34" fill="#020201"/>'
+    + '<rect x="158" y="84" width="176" height="176" rx="34" ry="34" fill="none" stroke="#FFD700" stroke-width="1.5" stroke-opacity="0.2"/>'
+    // Slash
+    + '<polygon points="308,36 382,36 382,108" fill="#020201" opacity="0.9"/>'
+    + '<line x1="290" y1="36" x2="382" y2="118" stroke="#FFFDE0" stroke-width="3.8" stroke-opacity="0.95" filter="url(#fGlow)"/>'
+    + '<line x1="287" y1="36" x2="382" y2="121" stroke="#FFD700" stroke-width="1.5" stroke-opacity="0.5"/>'
+    // Star burst
+    + '<circle cx="250" cy="172" r="86" fill="url(#gStar)" filter="url(#fCenter)"/>'
+    + '<line x1="180" y1="172" x2="320" y2="172" stroke="#FFF" stroke-width="1.2" stroke-opacity="0.65"/>'
+    + '<line x1="250" y1="102" x2="250" y2="242" stroke="#FFF" stroke-width="1.2" stroke-opacity="0.65"/>'
+    + '<line x1="200" y1="122" x2="300" y2="222" stroke="#FFF" stroke-width="0.7" stroke-opacity="0.38"/>'
+    + '<line x1="300" y1="122" x2="200" y2="222" stroke="#FFF" stroke-width="0.7" stroke-opacity="0.38"/>'
+    + '<circle cx="250" cy="172" r="11" fill="#FFF" filter="url(#fCenter)"/>'
+    + '<circle cx="250" cy="172" r="4" fill="#FFF"/>';
+
+  var _text =
+    '<line x1="55" y1="352" x2="172" y2="352" stroke="#FFD700" stroke-width="1.5" stroke-opacity="0.55"/>'
+    + '<line x1="328" y1="352" x2="445" y2="352" stroke="#FFD700" stroke-width="1.5" stroke-opacity="0.55"/>'
+    + '<text x="250" y="403" font-family="Arial Black,Impact,sans-serif" font-size="98" font-weight="900" text-anchor="middle" fill="url(#gM)" letter-spacing="5" filter="url(#fText)">OURO</text>'
+    + '<line x1="50" y1="423" x2="134" y2="423" stroke="#FFD700" stroke-width="1.2" stroke-opacity="0.7"/>'
+    + '<line x1="366" y1="423" x2="450" y2="423" stroke="#FFD700" stroke-width="1.2" stroke-opacity="0.7"/>'
+    + '<text x="250" y="438" font-family="Arial,Helvetica,sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="url(#gM)" letter-spacing="18" filter="url(#fText)">DIGITAL</text>'
+    + '<text x="250" y="468" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="300" text-anchor="middle" fill="#FFD700" letter-spacing="3" opacity="0.82">CORBUISTANDO ROJE A TECNOLOGIA DO FUTURO</text>'
+    + '<ellipse cx="250" cy="494" rx="115" ry="10" fill="url(#gFloor)" filter="url(#fCenter)"/>'
+    + '<ellipse cx="250" cy="491" rx="42" ry="5" fill="#FFD700" opacity="0.5"/>'
+    + '<circle cx="250" cy="487" r="6" fill="#FFD700" opacity="0.8" filter="url(#fCenter)"/>'
+    + '<circle cx="250" cy="487" r="2.2" fill="#FFF" opacity="0.95"/>';
+
+  var _logoSVG =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">'
+    + _d
+    + '<rect width="500" height="500" fill="#060300"/>'
+    + '<circle cx="250" cy="180" r="225" fill="url(#gAmb)"/>'
+    + _circuits
+    + '<rect x="247" y="0" width="6" height="36" fill="url(#gBeam)"/>'
+    + _O
+    + _text
+    + '</svg>';
+
+  const _logoURI = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(_logoSVG);
+
+  // Injeta logo em todas as imagens assim que o DOM estiver pronto
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.nav-logo-img, .hero-logo-img').forEach(function(img) {
+      img.src = _logoURI;
+      img.removeAttribute('onerror');
+      img.style.display = 'block';
+      // Esconde fallbacks
+      var parent = img.parentElement;
+      var icon = parent.querySelector('.nav-logo-icon');
+      var txt  = parent.querySelector('.nav-logo-text');
+      if (icon) icon.style.display = 'none';
+      if (txt)  txt.style.display  = 'none';
+    });
+  });
+
   // ===== THEME =====
   const themeBtn = document.getElementById('themeBtn');
   let isDark = true;
@@ -1043,7 +1159,7 @@
     const planNames = cartItems.map(i => i.name).join(', ');
     const total = cartItems.reduce((sum, i) => sum + i.price, 0);
     const msg = encodeURIComponent(`Olá! Tenho interesse nos planos: ${planNames}. Total: R$ ${total.toLocaleString('pt-BR')}/mês. Podemos conversar?`);
-    window.open(`https://wa.me/5500000000000?text=${msg}`, '_blank');
+    window.open(`https://wa.me/5511917949412?text=${msg}`, '_blank');
   }
 
   // ===== TOAST =====
